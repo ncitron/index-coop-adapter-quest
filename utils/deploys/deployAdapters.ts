@@ -14,6 +14,7 @@ import {
   ZeroExApiAdapter,
   SnapshotGovernanceAdapter,
   SynthetixExchangeAdapter,
+  SushiBarWrapAdapter
 } from "../contracts";
 
 import { Address, Bytes } from "./../types";
@@ -31,6 +32,7 @@ import { UniswapV2ExchangeAdapter__factory } from "../../typechain/factories/Uni
 import { UniswapV2ExchangeAdapterV2__factory } from "../../typechain/factories/UniswapV2ExchangeAdapterV2__factory";
 import { SnapshotGovernanceAdapter__factory } from "../../typechain/factories/SnapshotGovernanceAdapter__factory";
 import { SynthetixExchangeAdapter__factory } from "../../typechain/factories/SynthetixExchangeAdapter__factory";
+import { SushiBarWrapAdapter__factory } from "../../typechain/factories/SushiBarWrapAdapter__factory";
 
 export default class DeployAdapters {
   private _deployerSigner: Signer;
@@ -95,6 +97,13 @@ export default class DeployAdapters {
     return await new UniswapPairPriceAdapter__factory(this._deployerSigner).deploy(controller, uniswapFactory, uniswapPools);
   }
 
+  public async deploySushiBarWrapAdapter(
+    sushi: Address,
+    sushiBar: Address
+  ): Promise<SushiBarWrapAdapter> {
+    return await new SushiBarWrapAdapter__factory(this._deployerSigner).deploy(sushi, sushiBar);
+  }
+
   public async getUniswapPairPriceAdapter(uniswapAdapterAddress: Address): Promise<UniswapPairPriceAdapter> {
     return await new UniswapPairPriceAdapter__factory(this._deployerSigner).attach(uniswapAdapterAddress);
   }
@@ -114,4 +123,5 @@ export default class DeployAdapters {
       synthetixExchangerAddress
     );
   }
+
 }
