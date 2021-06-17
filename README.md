@@ -22,7 +22,7 @@ In this first quest, you will write an adapter that allows a Set to trade on Uni
 5. Export UniswapV2ExchangeAdapter with the other adapters at `utils/contracts/index.ts`. Note: you must run `yarn build` before doing this
 6. Add a `deployUniswapV2ExchangeAdapter(router: Address): Promise<UniswapV2ExchangeAdapter>` function to `utils/deploys/deployAdapters.ts`
 7. Run tests using `npx hardhat test test/protocol/integration/exchange/uniswapV2ExchangeAdapter.spec.ts`
-8. If the tests pass, congratulations! You can open a PR at https://github.com/ncitron/indexcoop-adapter-quest to get a quick code review from myself.
+8. If the tests pass, congratulations! You can open a PR at https://github.com/ncitron/index-coop-adapter-quest to get a quick code review from myself.
 
 ### Resources
 - `contracts/interfaces/IExchangeAdapter.sol` is the interface that all exchange adapters must adhere to
