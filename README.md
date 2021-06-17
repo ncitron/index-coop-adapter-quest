@@ -15,14 +15,15 @@ To test your contract run:
 In this first quest, you will write an adapter that allows a Set to trade on Uniswap via the TradeModule. Tests will be provided to you only for this fist quest. In order to complete this quest, your adapter will need to be able to encode the trade data to execute a Uniswap trade using Uniswap's `swapExactTokensForTokens` method.
 
 ### Steps
-1. Fork this repository and create a new branch for this quest
+1. Fork this repository and create a new branch for this quest'
 2. copy `.env.default` to a new `.env` file
-3. Create a file at `contracts/protocol/integration/exchange/UniswapV2ExchangeAdapter.sol` for your adapter
-4. Write the `getTradeCalldata` and `getSpender` methods for the adapter
-5. Export UniswapV2ExchangeAdapter with the other adapters at `utils/contracts/index.ts`. Note: you must run `yarn build` before doing this
-6. Add a `deployUniswapV2ExchangeAdapter(router: Address): Promise<UniswapV2ExchangeAdapter>` function to `utils/deploys/deployAdapters.ts`
-7. Run tests using `npx hardhat test test/protocol/integration/exchange/uniswapV2ExchangeAdapter.spec.ts`
-8. If the tests pass, congratulations! You can open a PR at https://github.com/ncitron/index-coop-adapter-quest to get a quick code review from myself.
+3. Run `yarn` to install dependencies
+4. Create a file at `contracts/protocol/integration/exchange/UniswapV2ExchangeAdapter.sol` for your adapter
+5. Write the `getTradeCalldata` and `getSpender` methods for the adapter
+6. Export UniswapV2ExchangeAdapter with the other adapters at `utils/contracts/index.ts`. Note: you must run `yarn build` before doing this
+7. Add a `deployUniswapV2ExchangeAdapter(router: Address): Promise<UniswapV2ExchangeAdapter>` function to `utils/deploys/deployAdapters.ts`
+8. Run tests using `npx hardhat test test/protocol/integration/exchange/uniswapV2ExchangeAdapter.spec.ts`
+9. If the tests pass, congratulations! You can open a PR at https://github.com/ncitron/index-coop-adapter-quest to get a quick code review from myself.
 
 ### Resources
 - `contracts/interfaces/IExchangeAdapter.sol` is the interface that all exchange adapters must adhere to
