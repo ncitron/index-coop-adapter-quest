@@ -15,11 +15,8 @@ import {
   CompoundWrapAdapter,
   YearnWrapAdapter,
   UniswapPairPriceAdapter,
-  UniswapV2ExchangeAdapter,
-  UniswapV2ExchangeAdapterV2,
   UniswapV2IndexExchangeAdapter,
   UniswapV2TransferFeeExchangeAdapter,
-  UniswapV3ExchangeAdapter,
   ZeroExApiAdapter,
   SnapshotGovernanceAdapter,
   SynthetixExchangeAdapter,
@@ -44,11 +41,8 @@ import { AaveWrapAdapter__factory } from "../../typechain/factories/AaveWrapAdap
 import { CompoundWrapAdapter__factory } from "../../typechain/factories/CompoundWrapAdapter__factory";
 import { YearnWrapAdapter__factory } from "../../typechain/factories/YearnWrapAdapter__factory";
 import { UniswapPairPriceAdapter__factory } from "../../typechain/factories/UniswapPairPriceAdapter__factory";
-import { UniswapV2ExchangeAdapter__factory } from "../../typechain/factories/UniswapV2ExchangeAdapter__factory";
 import { UniswapV2TransferFeeExchangeAdapter__factory } from "../../typechain/factories/UniswapV2TransferFeeExchangeAdapter__factory";
-import { UniswapV2ExchangeAdapterV2__factory } from "../../typechain/factories/UniswapV2ExchangeAdapterV2__factory";
 import { UniswapV2IndexExchangeAdapter__factory } from "../../typechain/factories/UniswapV2IndexExchangeAdapter__factory";
-import { UniswapV3ExchangeAdapter__factory } from "../../typechain/factories/UniswapV3ExchangeAdapter__factory";
 import { SnapshotGovernanceAdapter__factory } from "../../typechain/factories/SnapshotGovernanceAdapter__factory";
 import { SynthetixExchangeAdapter__factory } from "../../typechain/factories/SynthetixExchangeAdapter__factory";
 import { CompoundBravoGovernanceAdapter__factory } from "../../typechain/factories/CompoundBravoGovernanceAdapter__factory";
@@ -77,16 +71,8 @@ export default class DeployAdapters {
     );
   }
 
-  public async deployUniswapV2ExchangeAdapter(uniswapV2Router: Address): Promise<UniswapV2ExchangeAdapter> {
-    return await new UniswapV2ExchangeAdapter__factory(this._deployerSigner).deploy(uniswapV2Router);
-  }
-
   public async deployUniswapV2TransferFeeExchangeAdapter(uniswapV2Router: Address): Promise<UniswapV2TransferFeeExchangeAdapter> {
     return await new UniswapV2TransferFeeExchangeAdapter__factory(this._deployerSigner).deploy(uniswapV2Router);
-  }
-
-  public async deployUniswapV2ExchangeAdapterV2(uniswapV2Router: Address): Promise<UniswapV2ExchangeAdapterV2> {
-    return await new UniswapV2ExchangeAdapterV2__factory(this._deployerSigner).deploy(uniswapV2Router);
   }
 
   public async deployUniswapV2IndexExchangeAdapter(uniswapV2Router: Address): Promise<UniswapV2IndexExchangeAdapter> {
@@ -189,9 +175,5 @@ export default class DeployAdapters {
     return await new SynthetixExchangeAdapter__factory(this._deployerSigner).deploy(
       synthetixExchangerAddress
     );
-  }
-
-  public async deployUniswapV3ExchangeAdapter(swapRouter: Address): Promise<UniswapV3ExchangeAdapter> {
-      return await new UniswapV3ExchangeAdapter__factory(this._deployerSigner).deploy(swapRouter);
   }
 }

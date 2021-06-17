@@ -1,108 +1,34 @@
-<p align="center">
-  <a href="https://circleci.com/gh/SetProtocol/set-protocol-v2/tree/master">
-    <img src="https://img.shields.io/circleci/project/github/SetProtocol/set-protocol-v2/master.svg" />
-  </a>
-  <a href='https://coveralls.io/github/SetProtocol/set-protocol-v2?branch=master'><img src='https://coveralls.io/repos/github/SetProtocol/set-protocol-v2/badge.svg?branch=master&amp;t=4pzROZ' alt='Coverage Status' /></a>
-</p>
+# Index Coop Adapter Quest
 
-# Set Protocol V2 Contract Repository
+## Getting started
+To install the dependencies run:  
+`yarn`
 
-## Contracts
-[Set Protocol](https://setprotocol.com/) is a specification for tokenized asset management strategies on the ethereum blockchain written in the Solidity programming language. We use [Hardhat](https://hardhat.org/) as a development environment for compiling, testing, and deploying our contracts.
-
-## Development
-
-To use console.log during Solidity development, follow the [guides](https://hardhat.org/guides/hardhat-console.html).
-
-## Available Functionality
-
-### Run Hardhat EVM
-
-`yarn chain`
-
-### Build Contracts
-
-`yarn compile`
-
-To speed up compilation, install solc 0.6.10 natively with the following command.
-```
-brew install https://raw.githubusercontent.com/ethereum/homebrew-ethereum/06d13a8499801dc3ea4f19b2d24ed2eeb3072ebb/solidity.rb
-```
-
-### Generate TypeChain Typings
-
+To compile your contracts and generate TypeChain bindings run:  
 `yarn build`
 
-### Run Contract Tests
+To test your contract run:  
+`npx hardhat test path/to/test/file`
 
-`yarn test` to run compiled contracts
+## Quest 1: Write a Uniswap exchange adapter
+### Overview
+In this first quest, you will write an adapter that allows a Set to trade on Uniswap via the TradeModule. Tests will be provided to you only for this fist quest. In order to complete this quest, your adapter will need to be able to encode the trade data to execute a Uniswap trade using Uniswap's `swapExactTokensForTokens` method.
 
-OR `yarn test:clean` if contracts have been typings need to be updated
+### Steps
+1. Fork this repository and create a new branch for this quest
+2. copy `.env.default` to a new `.env` file
+3. Create a file at `contracts/protocol/integration/exchange/UniswapV2ExchangeAdapter.sol` for your adapter
+4. Write the `getTradeCalldata` and `getSpender` methods for the adapter
+5. Export UniswapV2ExchangeAdapter with the other adapters at `utils/contracts/index.ts`. Note: you must run `yarn build` before doing this
+6. Add a `deployUniswapV2ExchangeAdapter(router: Address): Promise<UniswapV2ExchangeAdapter>` function to `utils/deploys/deployAdapters.ts`
+7. Run tests using `npx hardhat test test/protocol/integration/exchange/uniswapV2ExchangeAdapter.spec.ts`
+8. If the tests pass, congratulations! You can open a PR at https://github.com/ncitron/indexcoop-adapter-quest to get a quick code review from myself.
 
-### Run Coverage Report for Tests
+### Resources
+- `contracts/interfaces/IExchangeAdapter.sol` is the interface that all exchange adapters must adhere to
+- `contracts/protocol/integration/exchange/SynthetixExchangeAdapter.sol` should provide a rough example of how to build an adapter
+- https://hackmd.io/@r1OYOYxYSP-6k15CBaosBQ/S1APkTjcO for a overview of how to write an adapter
+- https://uniswap.org/docs/v2/smart-contracts/router02/#swapexacttokensfortokens for information on the Uniswap function you need to encode
+- Make sure to look at the test at `test/protocol/integration/exchange/uniswapV2ExchangeAdapter.spec.ts` so that you know what you are trying to accomplish
 
-`yarn coverage`
-
-## Installing from `npm`
-
-We publish our contracts as well as [hardhat][22] and [typechain][23] compilation artifacts to npm.
-
-The distribution also comes with fixtures for mocking and testing SetProtocol's interactions with
-other protocols including Uniswap, Balancer, Compound (and many more.) To use these you'll need to install the peer dependencies listed in `package.json`.
-
-```
-npm install @setprotocol/set-protocol-v2
-```
-
-[22]: https://www.npmjs.com/package/hardhat
-[23]: https://www.npmjs.com/package/typechain
-
-## Contributing
-We highly encourage participation from the community to help shape the development of Set. If you are interested in developing on top of Set Protocol or have any questions, please ping us on [Telegram](https://t.me/joinchat/Fx8D6wyprLUlM1jMVnaRdg).
-
-## Security
-
-### TODO: Independent Audits
-
-### Code Coverage
-
-All smart contracts are tested and have 100% line and branch coverage.
-
-### Vulnerability Disclosure Policy
-
-The disclosure of security vulnerabilities helps us ensure the security of our users.
-
-**How to report a security vulnerability?**
-
-If you believe you’ve found a security vulnerability in one of our contracts or platforms,
-send it to us by emailing [security@setprotocol.com](mailto:security@setprotocol.com).
-Please include the following details with your report:
-
-* A description of the location and potential impact of the vulnerability.
-
-* A detailed description of the steps required to reproduce the vulnerability.
-
-**Scope**
-
-Any vulnerability not previously disclosed by us or our independent auditors in their reports.
-
-**Guidelines**
-
-We require that all reporters:
-
-* Make every effort to avoid privacy violations, degradation of user experience,
-disruption to production systems, and destruction of data during security testing.
-
-* Use the identified communication channels to report vulnerability information to us.
-
-* Keep information about any vulnerabilities you’ve discovered confidential between yourself and
-Set until we’ve had 30 days to resolve the issue.
-
-If you follow these guidelines when reporting an issue to us, we commit to:
-
-* Not pursue or support any legal action related to your findings.
-
-* Work with you to understand and resolve the issue quickly
-(including an initial confirmation of your report within 72 hours of submission).
-
-* Grant a monetary reward based on the OWASP risk assessment methodology.
+## Quest 2: Coming soon!
