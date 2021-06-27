@@ -46,8 +46,6 @@ contract UniswapV2ExchangeAdapter {
         router = _router;
     }
 
-
-
     /* ============ External Getter Functions ============ */
 
       /**
@@ -57,7 +55,7 @@ contract UniswapV2ExchangeAdapter {
      * @param  _destinationToken         Address of destination token to buy
      * @param  _destinationAddress       Address to receive traded tokens
      * @param  _sourceQuantity           Amount of source token to sell
-     * @param _minDestinationQuantity    Minimum amount destinaton token to be recieved for the transacction not to revert
+     * @param _minToQuantity    Minimum amount destinaton token to be recieved for the transacction not to revert
      * @param _data                      Call data
      *
      * @return address                   Target address
@@ -65,21 +63,28 @@ contract UniswapV2ExchangeAdapter {
      * @return bytes                     Trade calldata
      */
 
-
      /*
      * Write getTradeCalldata function with the parameters / return values listed above.
      * The function will return 3 values: address of the uniswap router, 0 for Call value, trade calldata
      */
-
-    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/){
-
-
+    function getTradeCalldata(
+        address _sourceToken,
+        address _destinationToken,
+        address _destinationAddress,
+        uint256 _sourceQuantity,
+        uint256 _minToQuantity,
+        bytes memory _data
+    )
+        external
+        view
+        returns (address, uint256, bytes memory)
+    {
     /*
     * We have created a path for the address' of _sourceToken and _destinationToken
     * to be used in the function call to the uniswap contract.
     */
 
-         address[] memory path;
+        address[] memory path;
 
         if (_data.length == 0){
             path = new address[](2);
@@ -89,17 +94,20 @@ contract UniswapV2ExchangeAdapter {
             path = abi.decode(_data, (address[]));
         }
 
-
     /*
     * Create a bytes memory variable called 'callData' to store the abi.encodedWithSignature data from Uniswap function swapExactTokensForTokens.
     * Please see README.md resources for more details on the Uniswap function swapExactTokensForTokens.
     */
+        bytes memory methodData = abi.encodeWithSignature(
+            "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+            _sourceQuantity,
+            _minToQuantity,
+            path,
+            _destinationAddress,
+            block.timestamp
+        );
 
-                    // YOUR CODE HERE
-
-
-          return (/*YOUR CODE HERE*/);
-
+        return (router, 0, methodData);
      }
 
 
