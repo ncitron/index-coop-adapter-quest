@@ -31,11 +31,7 @@ contract UniswapV2ExchangeAdapter {
     /*
     * Write a state varable to store the address of the Uniswap Exchange V2 Router Contract
     */
-   
-   
-                    // YOUR CODE HERE
-
-
+    address public immutable router;
 
     /* ============= Constructor ============= */
     /**
@@ -46,10 +42,10 @@ contract UniswapV2ExchangeAdapter {
     /*
     * Write a the constructor that sets the router address
     */
+    constructor(address _router) public {
+        router = _router;
+    }
 
-
-                    // YOUR CODE HERE
-    
 
 
     /* ============ External Getter Functions ============ */
