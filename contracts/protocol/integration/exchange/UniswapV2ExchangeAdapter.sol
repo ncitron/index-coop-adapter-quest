@@ -123,8 +123,12 @@ contract UniswapV2ExchangeAdapter {
 * @return address
 *
 */
-
-                // YOUR CODE HERE
-
+    function getSpender()
+        external
+        view
+        returns (address)
+    {
+        return router;
+    }
 }
 
