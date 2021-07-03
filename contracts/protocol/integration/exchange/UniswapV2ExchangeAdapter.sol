@@ -33,7 +33,7 @@ contract UniswapV2ExchangeAdapter {
     */
    
    
-    address public uniswapV2RouterAddress;
+    address public router;
                     // YOUR CODE HERE
 
 
@@ -50,7 +50,7 @@ contract UniswapV2ExchangeAdapter {
 
 
     constructor(address _router) public {
-        uniswapV2RouterAddress = _router;
+        router = _router;
     }
     
 
@@ -114,16 +114,16 @@ contract UniswapV2ExchangeAdapter {
     */   
 
         bytes memory callData = abi.encodeWithSignature(
-            "swapExactTokensForTokens(uint,uint,address[],address,uint)",
+            "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
             _sourceQuantity,
             _minDestinationQuantity,
             path,
             _destinationAddress,
-            now + 5 minutes
+            _data
         );
 
 
-        return (uniswapV2RouterAddress, 0, callData);
+        return (router, 0, callData);
 
      }
 
@@ -141,8 +141,8 @@ contract UniswapV2ExchangeAdapter {
 *
 */
 
-function getSpender() external view {
-    return uniswapV2RouterAddress;
+function getSpender() external view returns (address) {
+    return router;
 }
 
 }
