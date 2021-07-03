@@ -33,6 +33,7 @@ contract UniswapV2ExchangeAdapter {
     */
    
    
+    address public uniswapV2RouterAddress;
                     // YOUR CODE HERE
 
 
@@ -48,7 +49,9 @@ contract UniswapV2ExchangeAdapter {
     */
 
 
-                    // YOUR CODE HERE
+    constructor(address _router) {
+        uniswapV2RouterAddress = _router;
+    }
     
 
 
@@ -75,7 +78,7 @@ contract UniswapV2ExchangeAdapter {
      * The function will return 3 values: address of the uniswap router, 0 for Call value, trade calldata
      */
 
-    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/){
+    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/) {
 
 
     /* 
@@ -120,7 +123,9 @@ contract UniswapV2ExchangeAdapter {
 *
 */
 
-                // YOUR CODE HERE
+function getSpender() external view {
+    return uniswapV2RouterAddress;
+}
 
 }
 
