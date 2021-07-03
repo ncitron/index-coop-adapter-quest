@@ -119,7 +119,7 @@ contract UniswapV2ExchangeAdapter {
             _minDestinationQuantity,
             path,
             _destinationAddress,
-            _data
+            now
         );
 
 
