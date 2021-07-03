@@ -81,6 +81,7 @@ export { TradeModule } from "../../typechain/TradeModule";
 export { TradeAdapterMock } from "../../typechain/TradeAdapterMock";
 export { Uint256ArrayUtilsMock } from "../../typechain/Uint256ArrayUtilsMock";
 export { Uni } from "../../typechain/Uni";
+export { UniswapV2ExchangeAdapter } from "../../typechain/UniswapV2ExchangeAdapter";
 export { UniswapPairPriceAdapter } from "../../typechain/UniswapPairPriceAdapter";
 export { UniswapV2IndexExchangeAdapter } from "../../typechain/UniswapV2IndexExchangeAdapter";
 export { UniswapV2TransferFeeExchangeAdapter } from "../../typechain/UniswapV2TransferFeeExchangeAdapter";
