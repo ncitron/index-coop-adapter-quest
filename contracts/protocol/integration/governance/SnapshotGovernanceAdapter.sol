@@ -51,7 +51,13 @@ contract SnapshotGovernanceAdapter {
     }
 
     /**
-     * Delegates all Snapshot votes from a Set to the provided address.
+     * Delegate all Snapshot votes in a Set to a target address.
+     *
+     * @param _delegatee          Address to delegate snapshot votes to.
+     *
+     * @return address            DelegateRegistry contract address
+     * @return uint256            Total quantity of ETH to send (0)
+     * @return bytes              Calldata to execute delegation
      */
     function getDelegateCalldata(address _delegatee) external view returns (address, uint256, bytes memory) {
         bytes memory callData = abi.encodeWithSignature(
@@ -76,6 +82,10 @@ contract SnapshotGovernanceAdapter {
 
     /**
      * Revokes all delegated Snapshot votes from a Set.
+     *
+     * @return address            DelegateRegistry contract address
+     * @return uint256            Total quantity of ETH to send (0)
+     * @return bytes              Calldata to revoke delegated votes
      */
     function getRevokeCalldata() external view returns (address, uint256, bytes memory) {
         bytes memory callData = abi.encodeWithSignature(
