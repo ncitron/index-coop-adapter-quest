@@ -38,7 +38,7 @@ contract SnapshotGovernanceAdapter {
      * @param _delegateRegistry    Address of Snapshot DelegateRegistry contract
      */
     constructor(address _delegateRegistry) public {
-	delegateRegistry = _delegateRegistry;
+	    delegateRegistry = _delegateRegistry;
     }
 
     /* ============ External Getter Functions ============ */
