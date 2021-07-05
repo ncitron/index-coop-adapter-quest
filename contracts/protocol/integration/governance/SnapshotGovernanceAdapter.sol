@@ -44,13 +44,6 @@ contract SnapshotGovernanceAdapter {
     /* ============ External Getter Functions ============ */
 
     /**
-     * Reverts as Snapshot does not support on-chain governance proposals
-     */
-    function getVoteCalldata(uint256, bool, bytes memory) external view returns (address, uint256, bytes memory) {
-	      revert("Snapshot does not support on-chain voting");
-    }
-
-    /**
      * Delegate all Snapshot votes in a Set to a target address.
      *
      * @param _delegatee          Address to delegate snapshot votes to.
@@ -74,13 +67,6 @@ contract SnapshotGovernanceAdapter {
     }
 
     /**
-     * Reverts as Snapshot currently does not have a register mechanism in governance
-     */
-    function getRegisterCalldata(address /* _setToken */) external view returns (address, uint256, bytes memory) {
-        revert("No register available in Snapshot governance");
-    }
-
-    /**
      * Revokes all delegated Snapshot votes from a Set.
      *
      * @return address            DelegateRegistry contract address
@@ -101,9 +87,23 @@ contract SnapshotGovernanceAdapter {
     }
 
     /**
-     * Reverts as creating a proposal is only available to Snapshot genesis team
+     * Reverts as Snapshot does not support on-chain governance proposals.
+     */
+    function getVoteCalldata(uint256, bool, bytes memory) external view returns (address, uint256, bytes memory) {
+	      revert("Snapshot does not support on-chain voting");
+    }
+
+    /**
+     * Reverts as Snapshot does not have a register mechanism in governance.
+     */
+    function getRegisterCalldata(address /* _setToken */) external view returns (address, uint256, bytes memory) {
+        revert("Snapshot does not support governance registering.");
+    }
+
+    /**
+     * Reverts as creating Snapshot does not support creating porposals on-chain.
      */
     function getProposeCalldata(bytes memory /* _proposalData */) external view returns (address, uint256, bytes memory) {
-        revert("Creation of new proposal only available to AAVE genesis team");
+        revert("Snapshot does not support creating proposals on-chain.");
     }
 }
