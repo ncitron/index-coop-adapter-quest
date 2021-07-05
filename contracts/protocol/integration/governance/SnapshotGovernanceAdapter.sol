@@ -27,6 +27,9 @@ pragma experimental "ABIEncoderV2";
  * Governance adapter to delegate/revoke Snapshot votes.
  */
 contract SnapshotGovernanceAdapter {
+
+    /* ============ State Variables ============ */
+
     // Address of Snapshot DelegateRegistry contract.
     address public immutable delegateRegistry;
 
@@ -54,15 +57,15 @@ contract SnapshotGovernanceAdapter {
      */
     function getDelegateCalldata(address _delegatee) external view returns (address, uint256, bytes memory) {
         bytes memory callData = abi.encodeWithSignature(
-          "setDelegate(bytes32,address)",
-          bytes32(0),
-          _delegatee
+            "setDelegate(bytes32,address)",
+            bytes32(0),
+            _delegatee
         );
 
         return (
-          delegateRegistry,
-          0,
-          callData
+            delegateRegistry,
+            0,
+            callData
         );
     }
 
@@ -75,14 +78,14 @@ contract SnapshotGovernanceAdapter {
      */
     function getRevokeCalldata() external view returns (address, uint256, bytes memory) {
         bytes memory callData = abi.encodeWithSignature(
-          "clearDelegate(bytes32)",
-          bytes32(0)
+            "clearDelegate(bytes32)",
+            bytes32(0)
         );
 
         return (
-          delegateRegistry,
-          0,
-          callData
+            delegateRegistry,
+            0,
+            callData
         );
     }
 
@@ -90,7 +93,7 @@ contract SnapshotGovernanceAdapter {
      * Reverts as Snapshot does not support on-chain governance proposals.
      */
     function getVoteCalldata(uint256, bool, bytes memory) external view returns (address, uint256, bytes memory) {
-	      revert("Snapshot does not support on-chain voting");
+        revert("Snapshot does not support on-chain voting");
     }
 
     /**
