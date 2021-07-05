@@ -67,85 +67,21 @@ describe("SnapshotGovernanceAdapter", () => {
     });
   });
 
-  //   describe("getTradeCalldata", async () => {
-  //     let sourceAddress: Address;
-  //     let destinationAddress: Address;
-  //     let sourceQuantity: BigNumber;
-  //     let destinationQuantity: BigNumber;
+  describe("#getRevokeCalldata", async () => {
+    async function subject(): Promise<any> {
+      return await snapshotGovernanceAdapter.getRevokeCalldata();
+    }
 
-  //     let subjectMockSetToken: Address;
-  //     let subjectSourceToken: Address;
-  //     let subjectDestinationToken: Address;
-  //     let subjectSourceQuantity: BigNumber;
-  //     let subjectMinDestinationQuantity: BigNumber;
-  //     let subjectData: Bytes;
+    it("should return the correct revoke call data", async () => {
+      const calldata = await subject();
 
-  //     beforeEach(async () => {
-  //       sourceAddress = setup.wbtc.address; // WBTC Address
-  //       sourceQuantity = BigNumber.from(100000000); // Trade 1 WBTC
-  //       destinationAddress = setup.dai.address; // DAI Address
-  //       destinationQuantity = ether(30000); // Receive at least 30k DAI
+      const expectedCalldata = delegateRegistry.interface.encodeFunctionData("clearDelegate", [
+        ZERO_BYTES,
+      ]);
 
-  //       subjectSourceToken = sourceAddress;
-  //       subjectDestinationToken = destinationAddress;
-  //       subjectMockSetToken = mockSetToken.address;
-  //       subjectSourceQuantity = sourceQuantity;
-  //       subjectMinDestinationQuantity = destinationQuantity;
-  //       subjectData = EMPTY_BYTES;
-  //     });
-
-  //     async function subject(): Promise<any> {
-  //       return await uniswapV2ExchangeAdapter.getTradeCalldata(
-  //         subjectSourceToken,
-  //         subjectDestinationToken,
-  //         subjectMockSetToken,
-  //         subjectSourceQuantity,
-  //         subjectMinDestinationQuantity,
-  //         subjectData,
-  //       );
-  //     }
-
-  //     it("should return the correct trade calldata", async () => {
-  //       const calldata = await subject();
-  //       const callTimestamp = await getLastBlockTimestamp();
-  //       const expectedCallData = uniswapSetup.router.interface.encodeFunctionData(
-  //         "swapExactTokensForTokens",
-  //         [
-  //           sourceQuantity,
-  //           destinationQuantity,
-  //           [sourceAddress, destinationAddress],
-  //           subjectMockSetToken,
-  //           callTimestamp,
-  //         ],
-  //       );
-  //       expect(JSON.stringify(calldata)).to.eq(
-  //         JSON.stringify([uniswapSetup.router.address, ZERO, expectedCallData]),
-  //       );
-  //     });
-
-  //     describe("when passed in custom path to trade data", async () => {
-  //       beforeEach(async () => {
-  //         const path = [sourceAddress, setup.weth.address, destinationAddress];
-  //         subjectData = defaultAbiCoder.encode(["address[]"], [path]);
-  //       });
-
-  //       it("should return the correct trade calldata", async () => {
-  //         const calldata = await subject();
-  //         const callTimestamp = await getLastBlockTimestamp();
-  //         const expectedCallData = uniswapSetup.router.interface.encodeFunctionData(
-  //           "swapExactTokensForTokens",
-  //           [
-  //             sourceQuantity,
-  //             destinationQuantity,
-  //             [sourceAddress, setup.weth.address, destinationAddress],
-  //             subjectMockSetToken,
-  //             callTimestamp,
-  //           ],
-  //         );
-  //         expect(JSON.stringify(calldata)).to.eq(
-  //           JSON.stringify([uniswapSetup.router.address, ZERO, expectedCallData]),
-  //         );
-  //       });
-  //     });
-  //   });
+      expect(JSON.stringify(calldata)).to.eq(
+        JSON.stringify([delegateRegistry.address, ZERO, expectedCalldata]),
+      );
+    });
+  });
 });
