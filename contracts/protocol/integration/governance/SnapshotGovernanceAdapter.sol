@@ -56,12 +56,12 @@ contract SnapshotGovernanceAdapter {
     function getDelegateCalldata(address _delegatee) external view returns (address, uint256, bytes memory) {
         bytes memory callData = abi.encodeWithSignature(
           "setDelegate(bytes32,address)",
-          bytes(0),
+          bytes32(0),
           _delegatee
         );
 
         return (
-          _delegateRegistry,
+          delegateRegistry,
           0,
           callData
         );
@@ -78,10 +78,13 @@ contract SnapshotGovernanceAdapter {
      * Revokes all delegated Snapshot votes from a Set.
      */
     function getRevokeCalldata() external view returns (address, uint256, bytes memory) {
-        bytes memory callData = abi.encodeWithSignature("clearDelegate(bytes32)", bytes32(0));
+        bytes memory callData = abi.encodeWithSignature(
+          "clearDelegate(bytes32)",
+          bytes32(0)
+        );
 
         return (
-          _delegateRegistry,
+          delegateRegistry,
           0,
           callData
         );
