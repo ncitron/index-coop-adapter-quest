@@ -29,7 +29,7 @@ contract UniswapV2ExchangeAdapter is IExchangeAdapter {
     /**
     * Address of Uniswap Exchange V2 Router Contract
     **/
-    address public immutable uniswapV2RouterAddress;
+    address public immutable router;
 
     /* ============= Constructor ============= */
     /**
@@ -37,7 +37,7 @@ contract UniswapV2ExchangeAdapter is IExchangeAdapter {
     * @param _router Address of Uniswap Exchange V2 Rounter Contract
     **/
     constructor(address _router) public {
-        uniswapV2RouterAddress = _router;
+        router = _router;
     }
 
     /* ============ External Getter Functions ============ */
@@ -89,7 +89,7 @@ contract UniswapV2ExchangeAdapter is IExchangeAdapter {
             block.timestamp
         );
 
-        return (uniswapV2RouterAddress, 0, callData);
+        return (router, 0, callData);
     }
 
     /**
@@ -99,6 +99,6 @@ contract UniswapV2ExchangeAdapter is IExchangeAdapter {
     *
     */
     function getSpender() external view override returns (address) {
-        return uniswapV2RouterAddress;
+        return router;
     }
 }
