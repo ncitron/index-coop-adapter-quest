@@ -14,43 +14,31 @@
     limitations under the License.
 
     SPDX-License-Identifier: Apache License, Version 2.0
-    
+
 */
 
-pragma solidity ^0.6.10;
+pragma solidity 0.6.10;
 pragma experimental "ABIEncoderV2";
 
+import { IExchangeAdapter } from "../../../interfaces/IExchangeAdapter.sol";
 
-contract UniswapV2ExchangeAdapter {
+
+contract UniswapV2ExchangeAdapter is IExchangeAdapter {
 
     /* ============= State Variable ============= */
-    /** 
+    /**
     * Address of Uniswap Exchange V2 Router Contract
     **/
-
-    /*
-    * Write a state varable to store the address of the Uniswap Exchange V2 Router Contract
-    */
-   
-   
-                    // YOUR CODE HERE
-
-
+    address public immutable uniswapV2RouterAddress;
 
     /* ============= Constructor ============= */
-    /** 
+    /**
     * Set state variable
     * @param _router Address of Uniswap Exchange V2 Rounter Contract
     **/
-
-    /*
-    * Write a the constructor that sets the router address
-    */
-
-
-                    // YOUR CODE HERE
-    
-
+    constructor(address _router) public {
+        uniswapV2RouterAddress = _router;
+    }
 
     /* ============ External Getter Functions ============ */
   
@@ -122,5 +110,13 @@ contract UniswapV2ExchangeAdapter {
 
                 // YOUR CODE HERE
 
+    /**
+    *
+    * Returns the UniSwap contract address.
+    * @return address
+    *
+    */
+    function getSpender() external view override returns (address) {
+        return uniswapV2RouterAddress;
+    }
 }
-
