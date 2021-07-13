@@ -15,6 +15,7 @@ import {
   CompoundWrapAdapter,
   YearnWrapAdapter,
   UniswapPairPriceAdapter,
+  UniswapV2ExchangeAdapter,
   UniswapV2IndexExchangeAdapter,
   UniswapV2TransferFeeExchangeAdapter,
   ZeroExApiAdapter,
@@ -40,6 +41,7 @@ import { AaveWrapAdapter__factory } from "../../typechain/factories/AaveWrapAdap
 import { CompoundWrapAdapter__factory } from "../../typechain/factories/CompoundWrapAdapter__factory";
 import { YearnWrapAdapter__factory } from "../../typechain/factories/YearnWrapAdapter__factory";
 import { UniswapPairPriceAdapter__factory } from "../../typechain/factories/UniswapPairPriceAdapter__factory";
+import { UniswapV2ExchangeAdapter__factory } from "../../typechain/factories/UniswapV2ExchangeAdapter__factory";
 import { UniswapV2TransferFeeExchangeAdapter__factory } from "../../typechain/factories/UniswapV2TransferFeeExchangeAdapter__factory";
 import { UniswapV2IndexExchangeAdapter__factory } from "../../typechain/factories/UniswapV2IndexExchangeAdapter__factory";
 import { SynthetixExchangeAdapter__factory } from "../../typechain/factories/SynthetixExchangeAdapter__factory";
@@ -75,6 +77,10 @@ export default class DeployAdapters {
 
   public async deployUniswapV2IndexExchangeAdapter(uniswapV2Router: Address): Promise<UniswapV2IndexExchangeAdapter> {
     return await new UniswapV2IndexExchangeAdapter__factory(this._deployerSigner).deploy(uniswapV2Router);
+  }
+
+  public async deployUniswapV2ExchangeAdapter(uniswapV2Router: Address): Promise<UniswapV2ExchangeAdapter> {
+    return await new UniswapV2ExchangeAdapter__factory(this._deployerSigner).deploy(uniswapV2Router);
   }
 
   public async deployAaveGovernanceAdapter(aaveProtoGovernance: Address, aaveToken: Address): Promise<AaveGovernanceAdapter> {
