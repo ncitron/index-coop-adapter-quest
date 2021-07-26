@@ -12,7 +12,7 @@ To test your contract run:
 
 ## Quest 1: Write a Uniswap exchange adapter
 ### Overview
-In this first quest, you will write an adapter that allows a Set to trade on Uniswap via the TradeModule. Tests will be provided to you only for this fist quest. In order to complete this quest, your adapter will need to be able to encode the trade data to execute a Uniswap trade using Uniswap's `swapExactTokensForTokens` method. Being that this is the first quest, we will be providing most of the framework for this adapter. Please review the Resources at the bottom of this file and follow all the steps. Good Luck and have fun! 
+In this first quest, you will write an adapter that allows a Set to trade on Uniswap via the TradeModule. Tests will be provided to you only for this first quest. In order to complete this quest, your adapter will need to be able to encode the trade data to execute a Uniswap trade using Uniswap's `swapExactTokensForTokens` method. Being that this is the first quest, we will be providing most of the framework for this adapter. Please review the Resources at the bottom of this file and follow all the steps. Good Luck and have fun! 
 
 ### Steps
 1. Fork this repository and create a new branch for this quest'
@@ -20,7 +20,7 @@ In this first quest, you will write an adapter that allows a Set to trade on Uni
 3. Run `yarn` to install dependencies
 4. Navigate to `contracts/protocol/integration/exchange/UniswapV2ExchangeAdapter.sol` to create your smart contract adapter.
 5. Write the `getTradeCalldata` and `getSpender` methods for the adapter
-    - getTradeCalldata will use used to interact with the Uniswap swapExactTokensForTokens function. 
+    - getTradeCalldata will be used to interact with the Uniswap swapExactTokensForTokens function. 
     (For more details on swapExactTokensForTokens check out the link to Uniswap’s docs found in README under the resource tab)
     - getSpender will be used to return the address of the Uniswap router contract. 
 6. Export UniswapV2ExchangeAdapter with the other adapters at `utils/contracts/index.ts`. Note: you must run `yarn build` before doing this
