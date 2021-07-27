@@ -41,40 +41,40 @@ describe("SnapshotGovernanceAdapter", () => {
 
     addSnapshotBeforeRestoreAfterEach();
 
-    describe("Constructor", async () => {
-        let subjectDelegate: Address;
+    describe("#Constructor", async () => {
+        let subjectDelegateRegistry: Address;
 
         beforeEach(async () => {
-            subjectDelegate = await getRandomAddress();
+            subjectDelegateRegistry = await getRandomAddress();
         });
 
         async function subject(): Promise<any> {
-            return deployer.adapters.deploySnapshotGovernanceAdapter(subjectDelegate);
+            return deployer.adapters.deploySnapshotGovernanceAdapter(subjectDelegateRegistry);
         }
 
         it("should have returned the correct constructor address", async () => {
             const deployedSnapshotGovernanceAdapter = await subject();
 
-            const actualDelegateeAddress = await deployedSnapshotGovernanceAdapter.delegateRegistry();
-            expect(actualDelegateeAddress).to.eq(subjectDelegate);
+            const DelegateeAddress = await deployedSnapshotGovernanceAdapter.delegateRegistry();
+            expect(DelegateeAddress).to.eq(subjectDelegateRegistry);
         });
 
     });
 
     describe("getDelegateCalldata", async () => {
-        let subjectDelegate: Address;
+        let subjectDelegateRegistry: Address;
 
         beforeEach(async () => {
-            subjectDelegate = await getRandomAddress();
+            subjectDelegateRegistry = await getRandomAddress();
         });
 
         async function subject(): Promise<any> {
-            return snapshotGovernanceAdapter.getDelegateCalldata(subjectDelegate);
+            return snapshotGovernanceAdapter.getDelegateCalldata(subjectDelegateRegistry);
         }
 
         it("should return correct call data", async () => {
             const [targetAddress, Eth, delegate_calldata] = await subject();
-            const exptectedCallData = delegateRegistry.interface.encodeFunctionData("setDelegate", [ZERO_BYTES, subjectDelegate]);
+            const exptectedCallData = delegateRegistry.interface.encodeFunctionData("setDelegate", [ZERO_BYTES, subjectDelegateRegistry]);
 
             expect(targetAddress).to.eq(delegateRegistry.address);
             expect(Eth).to.eq(ZERO);

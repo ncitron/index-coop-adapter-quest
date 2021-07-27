@@ -37,8 +37,6 @@ import { Unitroller__factory } from "../../typechain/factories/Unitroller__facto
 import { WETH9__factory } from "../../typechain/factories/WETH9__factory";
 import { WhitePaperInterestRateModel__factory } from "../../typechain/factories/WhitePaperInterestRateModel__factory";
 import { LendingPoolAddressesProvider__factory } from "../../typechain/factories/LendingPoolAddressesProvider__factory";
-
-// import { DelegateRegistry } from "../../typechain/DelegateRegistry";
 import { DelegateRegistry__factory } from "../../typechain/factories/DelegateRegistry__factory";
 
 import {

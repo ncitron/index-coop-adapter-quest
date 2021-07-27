@@ -19,6 +19,11 @@
 pragma solidity 0.6.10;
 pragma experimental "ABIEncoderV2";
 
+/**
+* @title SnapshotGovernanceAdapter
+* Allows a Set to delegate all of its voting power on Snapshot.org. 
+ */
+
 contract SnapshotGovernanceAdapter {
 
 
@@ -54,8 +59,7 @@ contract SnapshotGovernanceAdapter {
      * @return bytes                     delegates calldata
      */
 
-    function getDelegateCalldata(address _delegatee) external view returns (address, uint256, bytes memory)
-    {
+    function getDelegateCalldata(address _delegatee) external view returns (address, uint256, bytes memory){
 
         bytes memory callData = abi.encodeWithSignature("setDelegate(bytes32,address)", bytes32(0), _delegatee);
 
