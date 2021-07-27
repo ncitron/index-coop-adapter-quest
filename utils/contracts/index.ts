@@ -95,3 +95,5 @@ export { YearnWrapAdapter } from "../../typechain/YearnWrapAdapter";
 export { YearnStrategyMock } from "../../typechain/YearnStrategyMock";
 export { ZeroExApiAdapter } from "../../typechain/ZeroExApiAdapter";
 export { ZeroExMock } from "../../typechain/ZeroExMock";
+export { SnapshotGovernanceAdapter } from "../../typechain/SnapshotGovernanceAdapter";
+export { DelegateRegistry } from "../../typechain/DelegateRegistry";

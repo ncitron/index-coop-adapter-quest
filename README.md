@@ -48,7 +48,9 @@ In this quest, you will be writing a Governance adapter that allows a Set to del
 Here is an overview of Snapshot's governance contract, called DelegateRegistry:
 | function | parameters | description |
 |----------|------------|-------------|
+
 | setDelegate | bytes32 id, address delegate | Delegates all votes of msg.sender to delegate. If id is left as ZERO_BYTES, then delegate all votes |
+
 | clearDelegate | bytes32 id | Revokes previous delegation from msg.sender. If id is left as ZERO_BYTES, then undelegate all votes |
 
 Note: for this governance adapter we want to use ZERO_BYTES for the id. In solidity, this can be done as `bytes32(0)`. In our tests, we have a helper constant exported from @utils/constants called `ZERO_BYTES`
