@@ -51,7 +51,7 @@ describe("SnapshotGovernanceAdapter", () => {
         });
     });
 
-    describe("getDelegateCallData", async () => {
+    describe("#getDelegateCallData", async () => {
         let subjectDelegatee: Address;
 
         before(async() => {
@@ -72,7 +72,7 @@ describe("SnapshotGovernanceAdapter", () => {
         });
     });
 
-    describe("getRevokeCallData", async () => {
+    describe("#getRevokeCallData", async () => {
         async function subject(): Promise<any> {
             return snapshotGovernanceAdapter.getRevokeCalldata();
         }
