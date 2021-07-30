@@ -238,7 +238,7 @@ export default class DeployExternalContracts {
     return await new CompoundPriceOracleMock__factory(this._deployerSigner).deploy();
   }
 
-  public async deplyDelegateRegistry(): Promise<DelegateRegistry> {
+  public async deployDelegateRegistry(): Promise<DelegateRegistry> {
     return await new DelegateRegistry__factory(this._deployerSigner).deploy();
   }
 
