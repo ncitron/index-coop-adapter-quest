@@ -21,6 +21,7 @@ import {
   SynthetixExchangeAdapter,
   CompoundBravoGovernanceAdapter,
   CompClaimAdapter,
+  UniswapV2ExchangeAdapter
 } from "../contracts";
 import { convertLibraryNameToLinkId } from "../common";
 import { Address, Bytes } from "./../types";
@@ -45,6 +46,7 @@ import { UniswapV2IndexExchangeAdapter__factory } from "../../typechain/factorie
 import { SynthetixExchangeAdapter__factory } from "../../typechain/factories/SynthetixExchangeAdapter__factory";
 import { CompoundBravoGovernanceAdapter__factory } from "../../typechain/factories/CompoundBravoGovernanceAdapter__factory";
 import { CompClaimAdapter__factory } from "../../typechain";
+import { UniswapV2ExchangeAdapter__factory } from "../../typechain/factories/UniswapV2ExchangeAdapter__factory";
 
 export default class DeployAdapters {
   private _deployerSigner: Signer;
@@ -168,6 +170,14 @@ export default class DeployAdapters {
   ): Promise<SynthetixExchangeAdapter> {
     return await new SynthetixExchangeAdapter__factory(this._deployerSigner).deploy(
       synthetixExchangerAddress
+    );
+  }
+
+  public async deployUniswapV2ExchangeAdapter(
+    uniswapRouterAddress: Address,
+  ): Promise<UniswapV2ExchangeAdapter> {
+    return await new UniswapV2ExchangeAdapter__factory(this._deployerSigner).deploy(
+      uniswapRouterAddress
     );
   }
 }

@@ -33,6 +33,7 @@ contract UniswapV2ExchangeAdapter {
     */
    
    
+    address public router;
                     // YOUR CODE HERE
 
 
@@ -48,7 +49,9 @@ contract UniswapV2ExchangeAdapter {
     */
 
 
-                    // YOUR CODE HERE
+    constructor(address _router) public {
+        router = _router;
+    }
     
 
 
@@ -75,7 +78,18 @@ contract UniswapV2ExchangeAdapter {
      * The function will return 3 values: address of the uniswap router, 0 for Call value, trade calldata
      */
 
-    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/){
+    function getTradeCalldata(
+        address _sourceToken,
+        address _destinationToken,
+        address _destinationAddress,
+        uint256 _sourceQuantity,
+        uint256 _minDestinationQuantity,
+        bytes calldata _data
+    ) external view returns (
+        address,
+        uint256,
+        bytes memory
+    ) {
 
 
     /* 
@@ -85,11 +99,11 @@ contract UniswapV2ExchangeAdapter {
 
          address[] memory path;
 
-        if (_data.length == 0){
+        if (_data.length == 0) {
             path = new address[](2);
             path[0] = _sourceToken;
             path[1] = _destinationToken;
-        }else {
+        } else {
             path = abi.decode(_data, (address[]));
         }
         
@@ -99,10 +113,17 @@ contract UniswapV2ExchangeAdapter {
     * Please see README.md resources for more details on the Uniswap function swapExactTokensForTokens.
     */   
 
-                    // YOUR CODE HERE
+        bytes memory callData = abi.encodeWithSignature(
+            "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+            _sourceQuantity,
+            _minDestinationQuantity,
+            path,
+            _destinationAddress,
+            block.timestamp
+        );
 
 
-          return (/*YOUR CODE HERE*/);
+        return (router, 0, callData);
 
      }
 
@@ -120,7 +141,9 @@ contract UniswapV2ExchangeAdapter {
 *
 */
 
-                // YOUR CODE HERE
+function getSpender() external view returns (address) {
+    return router;
+}
 
 }
 
