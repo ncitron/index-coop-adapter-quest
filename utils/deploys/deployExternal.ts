@@ -152,6 +152,8 @@ import { NonfungiblePositionManager__factory } from "../../typechain/factories/N
 import { Quoter__factory } from "../../typechain/factories/Quoter__factory";
 import { NFTDescriptor__factory } from "../../typechain/factories/NFTDescriptor__factory";
 
+import { SnapshotDelegateRegistry } from "../../typechain/SnapshotDelegateRegistry";
+import { SnapshotDelegateRegistry__factory } from "../../typechain/factories/SnapshotDelegateRegistry__factory";
 
 export default class DeployExternalContracts {
   private _deployerSigner: Signer;
@@ -590,5 +592,10 @@ export default class DeployExternalContracts {
 
   public async deployNFTDescriptor(): Promise<NFTDescriptor> {
     return await new NFTDescriptor__factory(this._deployerSigner).deploy();
+  }
+
+  // Snapshot
+  public async deploySnapshotDelegateRegistry(): Promise<SnapshotDelegateRegistry> {
+    return await new SnapshotDelegateRegistry__factory(this._deployerSigner).deploy();
   }
 }
