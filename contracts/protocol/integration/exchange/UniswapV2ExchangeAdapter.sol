@@ -27,29 +27,16 @@ contract UniswapV2ExchangeAdapter {
     /** 
     * Address of Uniswap Exchange V2 Router Contract
     **/
-
-    /*
-    * Write a state varable to store the address of the Uniswap Exchange V2 Router Contract
-    */
-   
-   
-                    // YOUR CODE HERE
-
-
+    address public immutable router;
 
     /* ============= Constructor ============= */
     /** 
     * Set state variable
     * @param _router Address of Uniswap Exchange V2 Rounter Contract
     **/
-
-    /*
-    * Write a the constructor that sets the router address
-    */
-
-
-                    // YOUR CODE HERE
-    
+    constructor(address _router) public {
+        router = _router;   
+    } 
 
 
     /* ============ External Getter Functions ============ */
@@ -61,66 +48,54 @@ contract UniswapV2ExchangeAdapter {
      * @param  _destinationToken         Address of destination token to buy
      * @param  _destinationAddress       Address to receive traded tokens
      * @param  _sourceQuantity           Amount of source token to sell
-     * @param _minDestinationQuantity    Minimum amount destinaton token to be recieved for the transacction not to revert
+     * @param _minDestinationQuantity    Minimum amount destination token to be recieved for the transaction not to revert
      * @param _data                      Call data
      *
      * @return address                   Target address
      * @return uint256                   Call value
      * @return bytes                     Trade calldata
      */
+    function getTradeCalldata(
+        address _sourceToken,
+        address _destinationToken,
+        address _destinationAddress,
+        uint _sourceQuantity,
+        uint _minDestinationQuantity,
+        bytes calldata _data
+    )
+        external view returns (address, uint256, bytes memory)
+    {
+        require(_sourceToken != _destinationToken, "Source token cannot be same as destination token");
 
-
-     /* 
-     * Write getTradeCalldata function with the parameters / return values listed above. 
-     * The function will return 3 values: address of the uniswap router, 0 for Call value, trade calldata
-     */
-
-    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/){
-
-
-    /* 
-    * We have created a path for the address' of _sourceToken and _destinationToken 
-    * to be used in the function call to the uniswap contract.
-    */
-
-         address[] memory path;
+        address[] memory path;
 
         if (_data.length == 0){
             path = new address[](2);
             path[0] = _sourceToken;
             path[1] = _destinationToken;
-        }else {
+        } else {
             path = abi.decode(_data, (address[]));
         }
         
-
-    /* 
-    * Create a bytes memory variable called 'callData' to store the abi.encodedWithSignature data from Uniswap function swapExactTokensForTokens.  
-    * Please see README.md resources for more details on the Uniswap function swapExactTokensForTokens.
-    */   
-
-                    // YOUR CODE HERE
-
-
-          return (/*YOUR CODE HERE*/);
-
+        bytes memory callData = abi.encodeWithSignature(
+            "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+            _sourceQuantity,
+            _minDestinationQuantity,
+            path,
+            _destinationAddress,
+            now 
+        );
+        return (router, 0, callData);
      }
 
-
-
-/*
-* Write the getSpender() function that will return the address of our set Uniswap router. 
-* make sure the function is external view
-*/
-
-/** 
-*
-* Returns the UniSwap contract address.
-* @return address
-*
-*/
-
-                // YOUR CODE HERE
-
+    /** 
+    *
+    * Returns the UniSwap contract address.
+    * @return address
+    *
+    */
+    function getSpender() external view returns (address) {
+        return router;
+    }
 }
 
