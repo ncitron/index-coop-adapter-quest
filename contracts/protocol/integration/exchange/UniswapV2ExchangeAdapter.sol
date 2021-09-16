@@ -61,7 +61,7 @@ contract UniswapV2ExchangeAdapter {
      * @param  _destinationToken         Address of destination token to buy
      * @param  _destinationAddress       Address to receive traded tokens
      * @param  _sourceQuantity           Amount of source token to sell
-     * @param _minDestinationQuantity    Minimum amount destinaton token to be recieved for the transacction not to revert
+     * @param _minDestinationQuantity    Minimum amount destinaton token to be recieved for the transaction not to revert
      * @param _data                      Call data
      *
      * @return address                   Target address
@@ -75,7 +75,7 @@ contract UniswapV2ExchangeAdapter {
      * The function will return 3 values: address of the uniswap router, 0 for Call value, trade calldata
      */
 
-    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/){
+    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/) {
 
 
     /* 
@@ -83,13 +83,13 @@ contract UniswapV2ExchangeAdapter {
     * to be used in the function call to the uniswap contract.
     */
 
-         address[] memory path;
+        address[] memory path;
 
-        if (_data.length == 0){
+        if (_data.length == 0) {
             path = new address[](2);
             path[0] = _sourceToken;
             path[1] = _destinationToken;
-        }else {
+        } else {
             path = abi.decode(_data, (address[]));
         }
         
@@ -108,17 +108,17 @@ contract UniswapV2ExchangeAdapter {
 
 
 
-/*
-* Write the getSpender() function that will return the address of our set Uniswap router. 
-* make sure the function is external view
-*/
+    /*
+    * Write the getSpender() function that will return the address of our set Uniswap router.
+    * make sure the function is external view
+    */
 
-/** 
-*
-* Returns the UniSwap contract address.
-* @return address
-*
-*/
+    /**
+    *
+    * Returns the UniSwap contract address.
+    * @return address
+    *
+    */
 
                 // YOUR CODE HERE
 
