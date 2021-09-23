@@ -36,6 +36,8 @@ import { Unitroller__factory } from "../../typechain/factories/Unitroller__facto
 import { WETH9__factory } from "../../typechain/factories/WETH9__factory";
 import { WhitePaperInterestRateModel__factory } from "../../typechain/factories/WhitePaperInterestRateModel__factory";
 import { LendingPoolAddressesProvider__factory } from "../../typechain/factories/LendingPoolAddressesProvider__factory";
+import { DelegateRegistry } from "./../contracts";
+import { DelegateRegistry__factory } from "../../typechain/factories/DelegateRegistry__factory";
 
 import {
   AaveGovernanceV2,
@@ -591,4 +593,9 @@ export default class DeployExternalContracts {
   public async deployNFTDescriptor(): Promise<NFTDescriptor> {
     return await new NFTDescriptor__factory(this._deployerSigner).deploy();
   }
+
+  public async deployDelegateRegistry(): Promise<DelegateRegistry> {
+    return await new DelegateRegistry__factory(this._deployerSigner).deploy();
+  }
+
 }
