@@ -68,4 +68,19 @@ describe("SnapshotGovernanceAdapter", () => {
       expect(callData).to.eq(expectedCallData);
     });
   });
+
+  describe("#getRevokeCalldata", async () => {
+    async function subject(): Promise<any> {
+      return snapshotGovernanceAdapter.getRevokeCalldata();
+    }
+
+    it("should return correct data for revoking", async () => {
+      const [targetAddress, ethValue, callData] = await subject();
+      const expectedCallData = delegateRegistry.interface.encodeFunctionData("clearDelegate", [ZERO_BYTES]);
+
+      expect(targetAddress).to.eq(delegateRegistry.address);
+      expect(ethValue).to.eq(ZERO);
+      expect(callData).to.eq(expectedCallData);
+    });
+  });
 });
