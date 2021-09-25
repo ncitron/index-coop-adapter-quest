@@ -15,12 +15,13 @@ const expect = getWaffleExpect();
 
 describe("SnapshotGovernanceAdapter", () => {
   let owner: Account;
+  let mockSetToken: Account;
   let deployer: DeployHelper;
   let snapshotGovernanceAdapter: SnapshotGovernanceAdapter;
   let delegateRegistry: DelegateRegistry;
 
   before(async () => {
-    [owner] = await getAccounts();
+    [owner, mockSetToken] = await getAccounts();
 
     deployer = new DeployHelper(owner.wallet);
     delegateRegistry = await deployer.external.deployDelegateRegistry();
@@ -69,6 +70,22 @@ describe("SnapshotGovernanceAdapter", () => {
     });
   });
 
+  describe("#getRegisterCalldata", async () => {
+    let subjectSetToken: Address;
+
+    beforeEach(async () => {
+      subjectSetToken = mockSetToken.address;
+    });
+
+    async function subject(): Promise<any> {
+      return snapshotGovernanceAdapter.getRegisterCalldata(subjectSetToken);
+    }
+
+    it("should revert", async () => {
+      await expect(subject()).to.be.revertedWith("No register available in Snapshot governance");
+    });
+  });
+
   describe("#getRevokeCalldata", async () => {
     async function subject(): Promise<any> {
       return snapshotGovernanceAdapter.getRevokeCalldata();
@@ -76,7 +93,9 @@ describe("SnapshotGovernanceAdapter", () => {
 
     it("should return correct data for revoking", async () => {
       const [targetAddress, ethValue, callData] = await subject();
-      const expectedCallData = delegateRegistry.interface.encodeFunctionData("clearDelegate", [ZERO_BYTES]);
+      const expectedCallData = delegateRegistry.interface.encodeFunctionData("clearDelegate", [
+        ZERO_BYTES,
+      ]);
 
       expect(targetAddress).to.eq(delegateRegistry.address);
       expect(ethValue).to.eq(ZERO);

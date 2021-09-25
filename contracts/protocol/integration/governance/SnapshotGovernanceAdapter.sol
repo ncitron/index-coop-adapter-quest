@@ -40,6 +40,13 @@ contract SnapshotGovernanceAdapter {
     }
 
     /**
+     * Reverts as Snapshot currently does not have a register mechanism in governance
+     */
+    function getRegisterCalldata(address /* _setToken */) external view returns (address, uint256, bytes memory) {
+        revert("No register available in Snapshot governance");
+    }
+
+    /**
      * Generates the calldata to revoke voting. This is equivalent to calling the clearDelegate function on the Registry.
      *
      * @return address              Target contract address
