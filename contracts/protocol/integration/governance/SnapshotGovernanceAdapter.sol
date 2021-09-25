@@ -57,5 +57,13 @@ contract SnapshotGovernanceAdapter {
         bytes memory callData = abi.encodeWithSignature(REVOKE_SIGNATURE, bytes32(0));
         return (delegateRegistry, 0, callData);
     }
+
+    /**
+     * Reverts as Snapshot currently does not have a propose mechanism in governance
+     */
+    function getProposeCalldata(address /* _setToken */) external view returns (address, uint256, bytes memory) {
+        revert("No propose available in Snapshot governance");
+    }
+
 }
 

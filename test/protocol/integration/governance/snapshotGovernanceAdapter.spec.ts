@@ -102,4 +102,20 @@ describe("SnapshotGovernanceAdapter", () => {
       expect(callData).to.eq(expectedCallData);
     });
   });
+
+  describe("#getProposeCalldata", async () => {
+    let subjectSetToken: Address;
+
+    beforeEach(async () => {
+      subjectSetToken = mockSetToken.address;
+    });
+
+    async function subject(): Promise<any> {
+      return snapshotGovernanceAdapter.getProposeCalldata(subjectSetToken);
+    }
+
+    it("should revert", async () => {
+      await expect(subject()).to.be.revertedWith("No propose available in Snapshot governance");
+    });
+  });
 });
