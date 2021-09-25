@@ -3,7 +3,7 @@ pragma experimental "ABIEncoderV2";
 
 
 /**
- * @title AaveGovernanceAdapter
+ * @title SnapshotGovernanceAdapter
  * @author Christian Koopmann
  *
  * Governance adapter for Snapshot
@@ -26,7 +26,7 @@ contract SnapshotGovernanceAdapter {
     /* ============ External Getter Functions ============ */
 
     /**
-     * Generates the calldata to delegate votes to another ETH address. Self and zero address allowed, which is equivalent to registering and revoking in Aave.
+     * Generates the calldata to delegate votes to another ETH address, which is equivalent to calling the setDelegate method on the registry.
      *
      * @param _delegatee            Address of the delegatee
      *
@@ -47,7 +47,7 @@ contract SnapshotGovernanceAdapter {
     }
 
     /**
-     * Generates the calldata to revoke voting. This is equivalent to calling the clearDelegate function on the Registry.
+     * Generates the calldata to revoke voting. This is equivalent to calling the clearDelegate function on the registry.
      *
      * @return address              Target contract address
      * @return uint256              Total quantity of ETH (Set to 0)
