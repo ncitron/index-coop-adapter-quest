@@ -27,13 +27,7 @@ contract UniswapV2ExchangeAdapter {
     /** 
     * Address of Uniswap Exchange V2 Router Contract
     **/
-
-    /*
-    * Write a state varable to store the address of the Uniswap Exchange V2 Router Contract
-    */
-   
-   
-                    // YOUR CODE HERE
+    address public immutable router;
 
 
 
@@ -42,13 +36,9 @@ contract UniswapV2ExchangeAdapter {
     * Set state variable
     * @param _router Address of Uniswap Exchange V2 Rounter Contract
     **/
-
-    /*
-    * Write a the constructor that sets the router address
-    */
-
-
-                    // YOUR CODE HERE
+    constructor (address _router) public {
+        router = _router;
+    }
     
 
 
@@ -119,8 +109,8 @@ contract UniswapV2ExchangeAdapter {
     * @return address
     *
     */
-
-                // YOUR CODE HERE
-
+    function getSpender() external view returns (address){
+        return router;
+    }
 }
 
