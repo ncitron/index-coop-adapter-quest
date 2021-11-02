@@ -24,37 +24,25 @@ pragma experimental "ABIEncoderV2";
 contract UniswapV2ExchangeAdapter {
 
     /* ============= State Variable ============= */
+    
     /** 
     * Address of Uniswap Exchange V2 Router Contract
     **/
-
-    /*
-    * Write a state varable to store the address of the Uniswap Exchange V2 Router Contract
-    */
-   
-   
-                    // YOUR CODE HERE
-
-
+    address public immutable router;
 
     /* ============= Constructor ============= */
+
     /** 
     * Set state variable
     * @param _router Address of Uniswap Exchange V2 Rounter Contract
     **/
-
-    /*
-    * Write a the constructor that sets the router address
-    */
-
-
-                    // YOUR CODE HERE
-    
-
+    constructor(address _router) public {
+        router = _router;
+    }
 
     /* ============ External Getter Functions ============ */
   
-      /**
+    /**
      * Calculate UniSwap trade encoded calldata. To be invoked on the SetToken.
      *
      * @param  _sourceToken              Address of source token to be sold
@@ -68,21 +56,27 @@ contract UniswapV2ExchangeAdapter {
      * @return uint256                   Call value
      * @return bytes                     Trade calldata
      */
+    function getTradeCalldata(
+        address _sourceToken, 
+        address _destinationToken, 
+        address _destinationAddress, 
+        uint256 _sourceQuantity, 
+        uint256 _minDestinationQuantity, 
+        bytes calldata _data
+    ) 
+        external 
+        view 
+        returns (address, uint256, bytes memory) 
+    {
+        require(
+            _sourceToken != _destinationToken,
+            "Source token cannot be same as destination token"
+        );
 
-
-     /* 
-     * Write getTradeCalldata function with the parameters / return values listed above. 
-     * The function will return 3 values: address of the uniswap router, 0 for Call value, trade calldata
-     */
-
-    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/) {
-
-
-    /* 
-    * We have created a path for the address' of _sourceToken and _destinationToken 
-    * to be used in the function call to the uniswap contract.
-    */
-
+        /* 
+        * We have created a path for the address' of _sourceToken and _destinationToken 
+        * to be used in the function call to the uniswap contract.
+        */
         address[] memory path;
 
         if (_data.length == 0) {
@@ -92,26 +86,22 @@ contract UniswapV2ExchangeAdapter {
         } else {
             path = abi.decode(_data, (address[]));
         }
-        
 
-    /* 
-    * Create a bytes memory variable called 'callData' to store the abi.encodedWithSignature data from Uniswap function swapExactTokensForTokens.  
-    * Please see README.md resources for more details on the Uniswap function swapExactTokensForTokens.
-    */   
+        /* 
+        * Create a bytes memory variable called 'callData' to store the abi.encodedWithSignature data from Uniswap function swapExactTokensForTokens.  
+        * Please see README.md resources for more details on the Uniswap function swapExactTokensForTokens.
+        */
+        bytes memory tradeCalldata = abi.encodeWithSignature(
+            "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",
+            _sourceQuantity,
+            _minDestinationQuantity,
+            path,
+            _destinationAddress,
+            block.timestamp // solhint-disable-line not-rely-on-time 
+        );
 
-                    // YOUR CODE HERE
-
-
-          return (/*YOUR CODE HERE*/);
-
-     }
-
-
-
-    /*
-    * Write the getSpender() function that will return the address of our set Uniswap router.
-    * make sure the function is external view
-    */
+        return (router, 0, tradeCalldata);
+    }
 
     /**
     *
@@ -119,8 +109,11 @@ contract UniswapV2ExchangeAdapter {
     * @return address
     *
     */
-
-                // YOUR CODE HERE
-
+    function getSpender() 
+        external 
+        view 
+        returns(address) 
+    {
+            return router;
+    }
 }
-

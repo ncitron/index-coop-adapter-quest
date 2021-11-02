@@ -14,7 +14,7 @@ import {
   CEther,
   PriceOracleProxy,
   Unitroller,
-  WhitePaperInterestRateModel
+  WhitePaperInterestRateModel,
 } from "./../contracts/compound";
 import {
   WETH9,
@@ -151,6 +151,10 @@ import { SwapRouter__factory } from "../../typechain/factories/SwapRouter__facto
 import { NonfungiblePositionManager__factory } from "../../typechain/factories/NonfungiblePositionManager__factory";
 import { Quoter__factory } from "../../typechain/factories/Quoter__factory";
 import { NFTDescriptor__factory } from "../../typechain/factories/NFTDescriptor__factory";
+
+
+import { DelegateRegistry } from "../contracts/index";
+import { DelegateRegistry__factory } from "../../typechain/factories/DelegateRegistry__factory";
 
 
 export default class DeployExternalContracts {
@@ -590,5 +594,10 @@ export default class DeployExternalContracts {
 
   public async deployNFTDescriptor(): Promise<NFTDescriptor> {
     return await new NFTDescriptor__factory(this._deployerSigner).deploy();
+  }
+
+  // SNAPSHOT
+  public async deployDelegateRegistry(): Promise<DelegateRegistry> {
+    return await new DelegateRegistry__factory(this._deployerSigner).deploy();
   }
 }
