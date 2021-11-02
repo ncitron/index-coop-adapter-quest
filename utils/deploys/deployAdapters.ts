@@ -21,7 +21,8 @@ import {
   SynthetixExchangeAdapter,
   CompoundBravoGovernanceAdapter,
   CompClaimAdapter,
-  UniswapV2ExchangeAdapter
+  UniswapV2ExchangeAdapter,
+  SnapshotGovernanceAdapter
 } from "../contracts";
 import { convertLibraryNameToLinkId } from "../common";
 import { Address, Bytes } from "./../types";
@@ -47,6 +48,7 @@ import { SynthetixExchangeAdapter__factory } from "../../typechain/factories/Syn
 import { CompoundBravoGovernanceAdapter__factory } from "../../typechain/factories/CompoundBravoGovernanceAdapter__factory";
 import { CompClaimAdapter__factory } from "../../typechain";
 import { UniswapV2ExchangeAdapter__factory } from "../../typechain/factories/UniswapV2ExchangeAdapter__factory";
+import { SnapshotGovernanceAdapter__factory } from "../../typechain/factories/SnapshotGovernanceAdapter__factory";
 
 export default class DeployAdapters {
   private _deployerSigner: Signer;
@@ -176,6 +178,12 @@ export default class DeployAdapters {
   public async deployUniswapV2ExchangeAdapter(router: Address): Promise<UniswapV2ExchangeAdapter> {
     return await new UniswapV2ExchangeAdapter__factory(this._deployerSigner).deploy(
       router
+    );
+  }
+
+  public async deploySnapshotGovernanceAdapter(delegateRegistry: Address): Promise<SnapshotGovernanceAdapter> {
+    return await new SnapshotGovernanceAdapter__factory(this._deployerSigner).deploy(
+      delegateRegistry
     );
   }
 }
