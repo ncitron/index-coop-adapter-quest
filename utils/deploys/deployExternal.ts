@@ -138,6 +138,8 @@ import {
 } from "../contracts/index";
 import { TokenSwap__factory } from "../../typechain/factories/TokenSwap__factory";
 
+import { DelegateRegistry } from "../contracts/snapshot";
+import { DelegateRegistry__factory } from "../../typechain/factories/DelegateRegistry__factory";
 
 import {
   SwapRouter,
@@ -569,6 +571,11 @@ export default class DeployExternalContracts {
   // AXIE-INFINITY
   public async deployTokenSwap(oldToken: Address, newToken: Address): Promise<TokenSwap> {
     return await new TokenSwap__factory(this._deployerSigner).deploy(oldToken, newToken);
+  }
+
+  // Snapshot
+  public async deployDelegateRegistr(): Promise<DelegateRegistry> {
+    return await new DelegateRegistry__factory(this._deployerSigner).deploy();
   }
 
   // Uniswap V3
