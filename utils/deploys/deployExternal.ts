@@ -16,9 +16,7 @@ import {
   Unitroller,
   WhitePaperInterestRateModel
 } from "./../contracts/compound";
-import {
-  WETH9,
-} from "./../contracts";
+import { DelegateRegistry, WETH9 } from "./../contracts";
 
 import { Address } from "./../types";
 
@@ -31,6 +29,7 @@ import { CompoundGovernorBravoDelegator__factory } from "../../typechain/factori
 import { CompoundGovernorBravoDelegate__factory } from "../../typechain/factories/CompoundGovernorBravoDelegate__factory";
 import { CompoundTimelock__factory } from "../../typechain/factories/CompoundTimelock__factory";
 import { Comptroller__factory } from "../../typechain/factories/Comptroller__factory";
+import { DelegateRegistry__factory } from "../../typechain/factories/DelegateRegistry__factory";
 import { PriceOracleProxy__factory } from "../../typechain/factories/PriceOracleProxy__factory";
 import { Unitroller__factory } from "../../typechain/factories/Unitroller__factory";
 import { WETH9__factory } from "../../typechain/factories/WETH9__factory";
@@ -237,6 +236,10 @@ export default class DeployExternalContracts {
 
   public async deployCompoundPriceOracleMock(): Promise<CompoundPriceOracleMock> {
     return await new CompoundPriceOracleMock__factory(this._deployerSigner).deploy();
+  }
+
+  public async deployDelegateRegistry(): Promise<DelegateRegistry> {
+    return await new DelegateRegistry__factory(this._deployerSigner).deploy();
   }
 
   public async deployPriceOracleProxy(
