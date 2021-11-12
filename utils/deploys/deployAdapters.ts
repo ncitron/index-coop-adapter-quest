@@ -18,6 +18,7 @@ import {
   UniswapV2IndexExchangeAdapter,
   UniswapV2TransferFeeExchangeAdapter,
   ZeroExApiAdapter,
+  SnapshotGovernanceAdapter,
   SynthetixExchangeAdapter,
   CompoundBravoGovernanceAdapter,
   CompClaimAdapter,
@@ -42,6 +43,7 @@ import { YearnWrapAdapter__factory } from "../../typechain/factories/YearnWrapAd
 import { UniswapPairPriceAdapter__factory } from "../../typechain/factories/UniswapPairPriceAdapter__factory";
 import { UniswapV2TransferFeeExchangeAdapter__factory } from "../../typechain/factories/UniswapV2TransferFeeExchangeAdapter__factory";
 import { UniswapV2IndexExchangeAdapter__factory } from "../../typechain/factories/UniswapV2IndexExchangeAdapter__factory";
+import { SnapshotGovernanceAdapter__factory } from "../../typechain/factories/SnapshotGovernanceAdapter__factory";
 import { SynthetixExchangeAdapter__factory } from "../../typechain/factories/SynthetixExchangeAdapter__factory";
 import { CompoundBravoGovernanceAdapter__factory } from "../../typechain/factories/CompoundBravoGovernanceAdapter__factory";
 import { CompClaimAdapter__factory } from "../../typechain";
@@ -161,6 +163,10 @@ export default class DeployAdapters {
 
   public async deployZeroExApiAdapter(zeroExAddress: Address, wethAddress: Address): Promise<ZeroExApiAdapter> {
     return await new ZeroExApiAdapter__factory(this._deployerSigner).deploy(zeroExAddress, wethAddress);
+  }
+
+  public async deploySnapshotGovernanceAdapter(delegateRegistry: Address): Promise<SnapshotGovernanceAdapter> {
+    return await new SnapshotGovernanceAdapter__factory(this._deployerSigner).deploy(delegateRegistry);
   }
 
   public async deploySynthetixExchangeAdapter(
