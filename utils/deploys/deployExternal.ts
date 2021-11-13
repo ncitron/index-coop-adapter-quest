@@ -574,7 +574,7 @@ export default class DeployExternalContracts {
   }
 
   // Snapshot
-  public async deployDelegateRegistr(): Promise<DelegateRegistry> {
+  public async deployDelegateRegistry(): Promise<DelegateRegistry> {
     return await new DelegateRegistry__factory(this._deployerSigner).deploy();
   }
 

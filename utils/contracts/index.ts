@@ -30,6 +30,7 @@ export { CustomSetValuerMock } from "../../typechain/CustomSetValuerMock";
 export { DebtIssuanceMock } from "../../typechain/DebtIssuanceMock";
 export { DebtIssuanceModule } from "../../typechain/DebtIssuanceModule";
 export { DebtModuleMock } from "../../typechain/DebtModuleMock";
+export { DelegateRegistry } from "../../typechain/DelegateRegistry";
 export { ExplicitERC20Mock } from "../../typechain/ExplicitERC20Mock";
 export { ForceFunderMock } from "../../typechain/ForceFunderMock";
 export { GaugeControllerMock } from "../../typechain/GaugeControllerMock";
