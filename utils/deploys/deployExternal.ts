@@ -85,10 +85,15 @@ import {
   Stableswap,
 } from "../contracts/curve";
 
+import {
+  DelegateRegistry
+} from "../contracts/snapshot";
+
 import { CurvePoolERC20__factory } from "../../typechain/factories/CurvePoolERC20__factory";
 import { Stableswap__factory } from "../../typechain/factories/Stableswap__factory";
 import { CurveDeposit__factory } from "../../typechain/factories/CurveDeposit__factory";
 import { CRVToken__factory } from "../../typechain/factories/CRVToken__factory";
+import { DelegateRegistry__factory } from "../../typechain/factories/DelegateRegistry__factory";
 import { GaugeController__factory } from "../../typechain/factories/GaugeController__factory";
 import { LiquidityGaugeReward__factory } from "../../typechain/factories/LiquidityGaugeReward__factory";
 import { Minter__factory } from "../../typechain/factories/Minter__factory";
@@ -463,6 +468,10 @@ export default class DeployExternalContracts {
       _aCoefficient,
       _fee
     );
+  }
+
+  public async deployDelegateRegistry(): Promise<DelegateRegistry> {
+    return await new DelegateRegistry__factory(this._deployerSigner).deploy();
   }
 
   public async deployCrvToken(_name: string, _symbol: string, _decimals: BigNumberish = 18): Promise<CRVToken> {
