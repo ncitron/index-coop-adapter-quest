@@ -31,10 +31,10 @@ contract SnapshotGovernanceAdapter {
     /* ============ Constants ============ */
 
     // Signature of delegate function
-    string public constant DELEGATE_SIGNATURE = "setDelegate(bytes,address)";
+    string public constant DELEGATE_SIGNATURE = "setDelegate(bytes32,address)";
     
     // Signature of revoke function
-    string public constant REVOKE_SIGNATURE = "clearDelegate(bytes)";
+    string public constant REVOKE_SIGNATURE = "clearDelegate(bytes32)";
 
     /* ============ State Variables ============ */
 
