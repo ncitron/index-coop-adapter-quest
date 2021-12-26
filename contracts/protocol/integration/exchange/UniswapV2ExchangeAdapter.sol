@@ -32,9 +32,8 @@ contract UniswapV2ExchangeAdapter {
     * Write a state variable to store the address of the Uniswap Exchange V2 Router Contract
     */
    
-   
-                    // YOUR CODE HERE
 
+    address public immutable router;
 
 
     /* ============= Constructor ============= */
@@ -47,8 +46,9 @@ contract UniswapV2ExchangeAdapter {
     * Write a the constructor that sets the router address
     */
 
-
-                    // YOUR CODE HERE
+    constructor(address _router) public {
+        router = _router;
+    }
     
 
 
@@ -75,8 +75,14 @@ contract UniswapV2ExchangeAdapter {
      * The function will return 3 values: address of the uniswap router, 0 for Call value, trade calldata
      */
 
-    function getTradeCalldata(/*YOUR CODE HERE*/) external view returns (/*YOUR CODE HERE*/) {
-
+    function getTradeCalldata( //
+        address _sourceToken,  //
+        address _destinationToken, //
+        address _destinationAddress, //
+        uint256 _sourceQuantity, //
+        uint256 _minDestinationQuantity, //
+        bytes calldata _data //
+    ) external view returns (address, uint256, bytes memory) {
 
     /* 
     * We have created a path for the address' of _sourceToken and _destinationToken 
@@ -93,17 +99,20 @@ contract UniswapV2ExchangeAdapter {
             path = abi.decode(_data, (address[]));
         }
         
+        bytes memory tradeCallData = abi.encodeWithSignature( //
+            "swapExactTokensForTokens(uint256,uint256,address[],address,uint256)",  //
+            _sourceQuantity, //
+            _minDestinationQuantity,  //
+            path,
+            _destinationAddress,
+            now
+        );
 
     /* 
     * Create a bytes memory variable called 'callData' to store the abi.encodedWithSignature data from Uniswap function swapExactTokensForTokens.  
     * Please see README.md resources for more details on the Uniswap function swapExactTokensForTokens.
     */   
-
-                    // YOUR CODE HERE
-
-
-          return (/*YOUR CODE HERE*/);
-
+          return (router, 0, tradeCallData);
      }
 
 
@@ -120,7 +129,8 @@ contract UniswapV2ExchangeAdapter {
     *
     */
 
-                // YOUR CODE HERE
-
+    function getSpender() external view returns (address) {
+        return router;
+    }
 }
 
