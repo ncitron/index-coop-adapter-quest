@@ -55,80 +55,51 @@ export default class DeployAdapters {
     this._deployerSigner = deployerSigner;
   }
 
-  public async deployKyberExchangeAdapter(
-    kyberNetworkProxy: Address,
-  ): Promise<KyberExchangeAdapter> {
+  public async deployKyberExchangeAdapter(kyberNetworkProxy: Address): Promise<KyberExchangeAdapter> {
     return await new KyberExchangeAdapter__factory(this._deployerSigner).deploy(kyberNetworkProxy);
   }
 
   public async deployOneInchExchangeAdapter(
     approveAddress: Address,
     exchangeAddress: Address,
-    swapFunctionSignature: Bytes,
+    swapFunctionSignature: Bytes
   ): Promise<OneInchExchangeAdapter> {
     return await new OneInchExchangeAdapter__factory(this._deployerSigner).deploy(
       approveAddress,
       exchangeAddress,
-      swapFunctionSignature,
+      swapFunctionSignature
     );
   }
 
-  public async deployUniswapV2TransferFeeExchangeAdapter(
-    uniswapV2Router: Address,
-  ): Promise<UniswapV2TransferFeeExchangeAdapter> {
-    return await new UniswapV2TransferFeeExchangeAdapter__factory(this._deployerSigner).deploy(
-      uniswapV2Router,
-    );
+  public async deployUniswapV2TransferFeeExchangeAdapter(uniswapV2Router: Address): Promise<UniswapV2TransferFeeExchangeAdapter> {
+    return await new UniswapV2TransferFeeExchangeAdapter__factory(this._deployerSigner).deploy(uniswapV2Router);
   }
 
-  public async deployUniswapV2IndexExchangeAdapter(
-    uniswapV2Router: Address,
-  ): Promise<UniswapV2IndexExchangeAdapter> {
-    return await new UniswapV2IndexExchangeAdapter__factory(this._deployerSigner).deploy(
-      uniswapV2Router,
-    );
+  public async deployUniswapV2IndexExchangeAdapter(uniswapV2Router: Address): Promise<UniswapV2IndexExchangeAdapter> {
+    return await new UniswapV2IndexExchangeAdapter__factory(this._deployerSigner).deploy(uniswapV2Router);
   }
 
-  public async deployAaveGovernanceAdapter(
-    aaveProtoGovernance: Address,
-    aaveToken: Address,
-  ): Promise<AaveGovernanceAdapter> {
-    return await new AaveGovernanceAdapter__factory(this._deployerSigner).deploy(
-      aaveProtoGovernance,
-      aaveToken,
-    );
+  public async deployAaveGovernanceAdapter(aaveProtoGovernance: Address, aaveToken: Address): Promise<AaveGovernanceAdapter> {
+    return await new AaveGovernanceAdapter__factory(this._deployerSigner).deploy(aaveProtoGovernance, aaveToken);
   }
 
-  public async deployAaveGovernanceV2Adapter(
-    aaveGovernanceV2: Address,
-    aaveToken: Address,
-  ): Promise<AaveGovernanceV2Adapter> {
-    return await new AaveGovernanceV2Adapter__factory(this._deployerSigner).deploy(
-      aaveGovernanceV2,
-      aaveToken,
-    );
+  public async deployAaveGovernanceV2Adapter(aaveGovernanceV2: Address, aaveToken: Address): Promise<AaveGovernanceV2Adapter> {
+    return await new AaveGovernanceV2Adapter__factory(this._deployerSigner).deploy(aaveGovernanceV2, aaveToken);
   }
 
   public async deployAaveMigrationWrapAdapter(
     aaveMigrationProxy: Address,
     lendToken: Address,
-    aaveToken: Address,
+    aaveToken: Address
   ): Promise<AaveMigrationWrapAdapter> {
-    return await new AaveMigrationWrapAdapter__factory(this._deployerSigner).deploy(
-      aaveMigrationProxy,
-      lendToken,
-      aaveToken,
-    );
+    return await new AaveMigrationWrapAdapter__factory(this._deployerSigner).deploy(aaveMigrationProxy, lendToken, aaveToken);
   }
 
   public async deployKyberMigrationWrapAdapter(
     kncLegacyToken: Address,
-    kncToken: Address,
+    kncToken: Address
   ): Promise<KyberMigrationWrapAdapter> {
-    return await new KyberMigrationWrapAdapter__factory(this._deployerSigner).deploy(
-      kncLegacyToken,
-      kncToken,
-    );
+    return await new KyberMigrationWrapAdapter__factory(this._deployerSigner).deploy(kncLegacyToken, kncToken);
   }
 
   public async deployAaveWrapAdapter(aaveLendingPool: Address): Promise<AaveWrapAdapter> {
@@ -138,26 +109,19 @@ export default class DeployAdapters {
   public async deployAxieInfinityMigrationWrapAdapter(
     tokenSwap: Address,
     oldToken: Address,
-    newToken: Address,
+    newToken: Address
   ): Promise<AxieInfinityMigrationWrapAdapter> {
-    return await new AxieInfinityMigrationWrapAdapter__factory(this._deployerSigner).deploy(
-      tokenSwap,
-      oldToken,
-      newToken,
-    );
+    return await new AxieInfinityMigrationWrapAdapter__factory(this._deployerSigner).deploy(tokenSwap, oldToken, newToken);
   }
 
-  public async deployCompoundWrapAdapter(
-    libraryName: string,
-    libraryAddress: Address,
-  ): Promise<CompoundWrapAdapter> {
+  public async deployCompoundWrapAdapter(libraryName: string, libraryAddress: Address): Promise<CompoundWrapAdapter> {
     const linkId = convertLibraryNameToLinkId(libraryName);
     return await new CompoundWrapAdapter__factory(
-      // @ts-ignore
+       // @ts-ignore
       {
         [linkId]: libraryAddress,
       },
-      this._deployerSigner,
+      this._deployerSigner
     ).deploy();
   }
 
@@ -169,32 +133,16 @@ export default class DeployAdapters {
     return await new YearnWrapAdapter__factory(this._deployerSigner).deploy();
   }
 
-  public async deployBalancerV1IndexExchangeAdapter(
-    balancerProxy: Address,
-  ): Promise<BalancerV1IndexExchangeAdapter> {
-    return await new BalancerV1IndexExchangeAdapter__factory(this._deployerSigner).deploy(
-      balancerProxy,
-    );
+  public async deployBalancerV1IndexExchangeAdapter(balancerProxy: Address): Promise<BalancerV1IndexExchangeAdapter> {
+    return await new BalancerV1IndexExchangeAdapter__factory(this._deployerSigner).deploy(balancerProxy);
   }
 
-  public async deployCompoundLikeGovernanceAdapter(
-    governanceAlpha: Address,
-    governanceToken: Address,
-  ): Promise<CompoundLikeGovernanceAdapter> {
-    return await new CompoundLikeGovernanceAdapter__factory(this._deployerSigner).deploy(
-      governanceAlpha,
-      governanceToken,
-    );
+  public async deployCompoundLikeGovernanceAdapter(governanceAlpha: Address, governanceToken: Address): Promise<CompoundLikeGovernanceAdapter> {
+    return await new CompoundLikeGovernanceAdapter__factory(this._deployerSigner).deploy(governanceAlpha, governanceToken);
   }
 
-  public async deployCompoundBravoGovernanceAdapter(
-    governorBravo: Address,
-    governanceToken: Address,
-  ): Promise<CompoundBravoGovernanceAdapter> {
-    return await new CompoundBravoGovernanceAdapter__factory(this._deployerSigner).deploy(
-      governorBravo,
-      governanceToken,
-    );
+  public async deployCompoundBravoGovernanceAdapter(governorBravo: Address, governanceToken: Address): Promise<CompoundBravoGovernanceAdapter> {
+    return await new CompoundBravoGovernanceAdapter__factory(this._deployerSigner).deploy(governorBravo, governanceToken);
   }
 
   public async deployCurveStakingAdapter(gaugeController: Address): Promise<CurveStakingAdapter> {
@@ -204,38 +152,24 @@ export default class DeployAdapters {
   public async deployUniswapPairPriceAdapter(
     controller: Address,
     uniswapFactory: Address,
-    uniswapPools: Address[],
+    uniswapPools: Address[]
   ): Promise<UniswapPairPriceAdapter> {
-    return await new UniswapPairPriceAdapter__factory(this._deployerSigner).deploy(
-      controller,
-      uniswapFactory,
-      uniswapPools,
-    );
+    return await new UniswapPairPriceAdapter__factory(this._deployerSigner).deploy(controller, uniswapFactory, uniswapPools);
   }
 
-  public async getUniswapPairPriceAdapter(
-    uniswapAdapterAddress: Address,
-  ): Promise<UniswapPairPriceAdapter> {
-    return await new UniswapPairPriceAdapter__factory(this._deployerSigner).attach(
-      uniswapAdapterAddress,
-    );
+  public async getUniswapPairPriceAdapter(uniswapAdapterAddress: Address): Promise<UniswapPairPriceAdapter> {
+    return await new UniswapPairPriceAdapter__factory(this._deployerSigner).attach(uniswapAdapterAddress);
   }
 
-  public async deployZeroExApiAdapter(
-    zeroExAddress: Address,
-    wethAddress: Address,
-  ): Promise<ZeroExApiAdapter> {
-    return await new ZeroExApiAdapter__factory(this._deployerSigner).deploy(
-      zeroExAddress,
-      wethAddress,
-    );
+  public async deployZeroExApiAdapter(zeroExAddress: Address, wethAddress: Address): Promise<ZeroExApiAdapter> {
+    return await new ZeroExApiAdapter__factory(this._deployerSigner).deploy(zeroExAddress, wethAddress);
   }
 
   public async deploySynthetixExchangeAdapter(
     synthetixExchangerAddress: Address,
   ): Promise<SynthetixExchangeAdapter> {
     return await new SynthetixExchangeAdapter__factory(this._deployerSigner).deploy(
-      synthetixExchangerAddress,
+      synthetixExchangerAddress
     );
   }
 
