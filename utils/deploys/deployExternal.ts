@@ -594,7 +594,7 @@ export default class DeployExternalContracts {
     return await new NFTDescriptor__factory(this._deployerSigner).deploy();
   }
 
-  public async deployDelegateRegistry(router: Address): Promise<DelegateRegistry> {
+  public async deployDelegateRegistry(): Promise<DelegateRegistry> {
     return await new DelegateRegistry__factory(this._deployerSigner).deploy();
   }
 }
